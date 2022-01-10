@@ -2,6 +2,8 @@
 
 # String类与StringBuffer类
 
+[TOC]
+
 ## String类的初始化
 
 - 使用字符串常量直接初始化一个String对象
