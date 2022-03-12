@@ -35,7 +35,7 @@ Bean版本, 公测版本;
 
 ## MySQL的安装
 
-注意: 在安装MySQL Server前通常应先安装 Microsoft NET Framework 4.0或其以上版本.
+注意: 在安装MySQL Server前应先安装 Microsoft Visual C++ 2015.
 
 如果以MySQL安装包文件方式启动安装, 选择安装类型时:
 
