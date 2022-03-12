@@ -47,6 +47,7 @@ admin[数据库管理员] --> DBMS
 
 - 关系型数据库(Relational DataBase)
   "关系"实际上是一张二维表,它由行和列组成.表格中的数据能以许多不同的方式被存取或重新召集而不需要重新组织数据库表, 用户和应用程序是通过结构化语言(SQL)访问关系型数据库.
+  <br/>
   - 表
     表是数据在一个数据库中的存储容器, 即数据表.它包含一组固定的列,表中的列描述该表所跟踪的实体的属性.
     - 表的术语:
@@ -56,6 +57,7 @@ admin[数据库管理员] --> DBMS
         4. 字段名: 表中的列名, 每个字段名在一张表中是唯一的.
         5. 主键: 能唯一标识一条记录的字段或字段组合, 即表中的关键字段.
         6. 外键: 表中的字段, 它们在其它表中作为主键存在, 一张表的外键是对另一张表中主键的引用.
+    <br/>
     - 关系型数据库的特点:
       - 优点:
         1. 容易理解
@@ -102,4 +104,90 @@ MySQL是瑞典MySQL AB公司开发的一个可用于各种流行操作系统的�
 <br/>
 
 - MySQL 8.0的新特性:
-  1. 
+  1. **新增了事务类型的数据字典**, 所有元数据都用<u>InnoDB存储引擎</u>进行存储.
+  2. **配置持久化**, 新增<u>"set persist命令"</u>, 下次启动时数据库会从配置文件中读取.
+  3. **字符集**(数据库的缺省编码将改为<u>utf8mb4</u>,这个编码包含了所有emoji字符)
+  4. **隐藏索引**(索引可以被"隐藏"和"显示", 开始支持<u>invisible index</u>)
+  5. **新增窗口函数(Window Functions)**,它可以用来实现若干新的查询方式,查询结果将放回多行中,即<u>窗口函数不需要GROUP BY</u>.
+  6. **通用表达式**, 在复杂查询中使用嵌入式表时, 使用<u>通用表表达式</u>(Common Table Expressions, CTE)使得查询结果更清晰.
+  7. **安全性**, <u>对OpenSSL的改进, 新的默认身份验证, SQL角色, 密码强度, 授权</u>.
+
+## 数据库访问技术
+
+- ODBC(Open DataBase Connectivity, 开放数据库互连)
+  ODBC是一种用来在数据库管理系统中存取数据的标准应用程序接口.
+  它是微软公司开放服务结构(WOSA, Windows Open Services architecture)中关于数据库的一个组成部分, 它建立了一套规范, 并提供了一组对数据库访问的标准API(应用程序编程接口).
+  `应用程序要访问一个数据库, 必须用ODBC管理器注册一个数据源, 管理器根据数据源提供的数据库位置, 数据库类型以及ODBC驱动程序等信息, 建立起ODBC与具体数据库的联系`.
+
+<br/>
+
+- OLE DB(Object Link and Embed, 对象链接与嵌入)
+  OLE是微软的通向不同数据源的低级应用程序接口.
+  OLE DB是Visual C++开发数据库应用中提供的基于COM接口的新技术,不仅包括微软资助的标准数据接口开放数据库连通性的结构化查询语言能力, 还具有面向其它非SQL数据类型的通路.
+
+<br/>
+
+- ADO(ActiveX Data Objects)
+  ADO是一个用于存取数据源的COM组件, 是为Microsoft的数据访问接口OLE DB设计的, 是一个便于使用的应用程序层.
+
+<br/>
+
+- DAO(Data Access Object, 数据访问对象集)
+  是Microsoft提供的基于一个数据库对象集合的访问技术. 和ODBC一样, 是Windows API的一部分, 可以独立于DBMS进行数据库的访问.
+  DAO是建立在Microsoft Jet(Microsoft Access的数据库引擎)的基础之上的.
+
+<br/>
+
+- JDBC(Java DataBase Connectivity, Java数据库连接)
+  `JDBC(Java数据库互连接口)是一种可用于执行SQL语句的数据库API, 由一些Java语言写成的类、界面组成。功能上与ODBC相似, 给开发人员提供了一个统一的、标准的数据库访问接口`.
+  JDBC用于访问关系型数据库的应用程序编程接口是对ODBC API的一种面向对象的封装和重新设计.
+  Java应用程序通过JDBC API与数据库连接, 而实际动作由JDBC驱动程序管理器(Driver Manager)通过JDBC驱动程序与数据库进行连接.
+  - Driver Manager接口
+    管理数据库驱动程序的列表, 确定内容是否符合从Java应用程序使用的通信子协议正确的数据库驱动程序的连接请求.
+  - Driver接口
+    此接口处理与数据库服务器通信, 很少直接使用驱动程序Driver对象, 一般使用DriverManager中的对象.
+  - Connection接口
+    代表与数据库的连接. 通过它调用createStatement()能够创建Statement对象.
+  - Statement接口
+    用来执行SQL语句并返回结果记录集.
+  - ResultSet接口
+    SQL语句执行后的结果记录集, 必须逐行访问数据行, 但是可以用任意顺序访问列.
+
+## JDBC访问数据库的步骤
+
+- 1. 注册驱动
+
+```java
+   Class.forName("com.mysql.jdbc.Driver");
+   // MySQL 6.0以下版本驱动是com.mysql.jdbc.Driver
+   // MySQL 6.0以上版本驱动是com.cj.mysql.jdbc.Driver
+```
+
+- 2. 获取连接
+
+```java
+   String url = "jdbc:mysql://localhost:3306/dbName";
+   String userName = "userName";
+   String password = "password";
+   Connection connection = DriverManager.getConnection(url, userName, password);
+```
+
+- 3. 创建Statement对象
+
+```java
+Statement statement = connection.createStatement();
+```
+
+- 4. 执行SQL语句
+
+```java
+String sql = "select * from tableName";
+ResultSet resultSet = statement.execute(sql);
+```
+
+- 5.关闭资源
+
+> resultSet.close() --> statement.close() --> connection.close()
+> 注意资源关闭的顺序, 以及要抛出异常.
+
+<font color=red>Tips: 配合《MySQL数据库实用教程》课后习题食用更佳!Page9</font>
