@@ -116,4 +116,4 @@ set collation_server = gbk_chinese_ci;
 - 字符串类型
 - 二进制数据类型
 - 日期与时间类型
-- enum枚举类型与set集合类型
+- enum枚举类型(单选)与set集合类型(复选)
