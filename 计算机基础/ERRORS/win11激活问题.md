@@ -19,6 +19,5 @@
     卸载和安装这一步, 有的博客使用的命令是**slmgr.vbs**,不知道有无影响;
     产品密钥网上很多,我试了几个win7/win8的密钥,没有成功,产品密钥为:
     TPJ6C-YY8KK-Y7XHQ-GDW7H-DFQJV
-    TPJ6C-YY8KK-Y7XHQ-GDW7H-DFQJV
     BMBXP-J4MHQ-4K76K-C9VV8-248C9
     PW48G-MNG8W-B9978-YWBRP-76DGY
