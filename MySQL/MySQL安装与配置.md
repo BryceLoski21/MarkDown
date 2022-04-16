@@ -47,7 +47,7 @@ Complete表示完全安装,表示安装所有MySQL组件;
 
 1. 将压缩包解压在你想安装的目录下.
 2. 配置MySQL的环境变量, 找到系统变量下的Path变量, 新增一行解压后的MySQL文件夹下的bin目录(例如"C:\Program Files\MySQL\MySQL Server 5.6\bin;")作为其值,并注意";"结尾.
-3. 在MySQL的根目录(bin同级)下创建一个my.ini(附文末), 注意my.ini里的目录斜杠需要使用转义符,"\\"写成"\\\".
+3. 在MySQL的根目录(bin同级)下创建一个my.ini(附文末), 注意my.ini里的目录斜杠需要使用转义符,"\\"写成"\\\\".
 4. 管理员权限下打开Windows Terminal, 使用cd命令切换到MySQL的bin目录下(如 cd C:\Program Files\MySQL\MySQL Server 5.6\bin).
 5. mysqld --initialize --console  这一步要复制默认密码, 出现error时,注意根目录下是否已存在data目录,若有就将其删掉.
 6. mysqld --install  如果安装不成功或者服务已存在, 输入 sc query mysql   ->   sc delete mysql   ->  mysqld --remove
