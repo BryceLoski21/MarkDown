@@ -33,7 +33,7 @@
   5: 拒绝访问。"**
   没有找到原因...
   给不了wt管理员权限, 我就直接用cmd运行命令了
-  > runas /noprofile /user:Administrator "net stop mysql"
-  > runas /user:Administrator "net start mysql"
+  > runas /noprofile /user:Administrator "cmd /c net stop mysql"
+  > runas /user:Administrator "cmd /c net start mysql"
 
 注: wt.exe在C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\wt.exe
