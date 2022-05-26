@@ -53,7 +53,7 @@
     1. 更新语句: begin、set autocommit = 1、start transaction、rename table、truncate table等语句。
     2. 数据定义: create、alter、drop语句
     3. 权限管理和账户管理语句: grant、revoke、set password、create user、drop user、rename user等语句。
-    4. 锁语句: lock tables、unlock tables。
+    4. 锁语句: lock table、unlock table。
 
     <font color=red>为了有效的提交事务，数据库开发人员应尽量显式地提交事务。</font>
 
