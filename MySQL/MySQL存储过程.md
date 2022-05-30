@@ -69,6 +69,10 @@
 - 使用`show procedure status`命令查看存储过程的定义
 
 - 查看某个数据库中的所有存储过程名
+  > **mysql 8.0 版本以上是没有MySQL.proc表的, 已经由information_schema.routines表平替; 也可以拷贝data/mysql/proc.frm, proc.MYD, proc.MYI 三个文件到你的数据库data/mysql/ 目录下，重启数据库**
+  > mysql 8.0以上版本使用语句:
+  > select specific_name from information_schema.routines where routine_type = 'PROCEDURE';
+  > 以下语句针对MySQL 5.6版本:
   > SELECT name FROM MySQL.proc WHERE DB = '数据库名' AND type = 'PROCEDURE';
 
 - 使用`show create procedure 存储过程名;`可以查看指定数据库指定存储过程的详细信息

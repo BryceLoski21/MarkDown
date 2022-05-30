@@ -61,7 +61,7 @@
 函数的维护主要是查看函数的定义,常用方法有以下四种:
 
 1. 查看当前数据库的所有的自定义函数的信息: **"show function status;"**
-2. 查看指定数据库中所有自定义函数名,可以使用sql语句: **"select name from MySQL.PROC where DB='数据库名' and TYPE='FUNCTION';"**(Windows下的MySQL不区分表名大小写,这里是为了便于区分)
+2. 查看指定数据库中所有自定义函数名,可以使用sql语句(MySQL 8.0版本是没有mysql.proc表的, 8.0以上该表已经由information_schema.routines表平替了, 下面语句供MySQL 5.6版本使用): **"select name from MySQL.PROC where DB='数据库名' and TYPE='FUNCTION';"**(Windows下的MySQL不区分表名大小写,这里是为了便于区分, 但是数据值是区分大小写的, 别写错了)
 3. 查看指定自定义函数的详细信息: **"show create function 函数名;"**(建议结尾符使用\G)
 4. 函数的信息都保存在information_schema数据库中的routines表中,使用select语句可以查询函数的相关信息: **"select * from INFORMATION_SCHEMA.ROUTINES where ROUTINE_NAME='函数名';"**(建议结尾符使用\G)
 
