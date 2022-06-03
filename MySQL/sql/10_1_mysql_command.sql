@@ -85,3 +85,11 @@ select * from table1_name where column1 != null or column2 != null;
 select * from table1_name where column1 not in (1234123421, 1234123454, 5678567856);
 
 select distinct * from table1_name;
+
+select count(*) as 总人数 from student;
+
+select max(成绩) from choose where 课程号 = 1;
+
+select 买家ID, SUM(下单数量), AVG(下单数量) from dingdan group by 买家ID;
+
+select 学号, count(课程号) from choose group by 学号 having count(课程号) > 2;
