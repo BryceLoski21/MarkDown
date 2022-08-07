@@ -93,3 +93,73 @@ select max(成绩) from choose where 课程号 = 1;
 select 买家ID, SUM(下单数量), AVG(下单数量) from dingdan group by 买家ID;
 
 select 学号, count(课程号) from choose group by 学号 having count(课程号) > 2;
+
+create procedure proc_cursor_1()
+modifies sql data 
+begin
+    declare state char(20);
+    declare my_score int;
+    declare my_stuid char(20);
+    declare my_cursor cursor for select 考生号, 总成绩 from xsb;
+    declare continue handler for not found set state = 'error';
+    open my_cursor;
+    ADD_NUM: repeat
+        fetch my_cursor into my_stuid, my_score;
+        if state = 'error' then leave ADD_NUM;
+        end if;
+        set my_score = my_score + 1;
+        update xsb set 总成绩 = my_score where 考生号 = my_stuid;
+    until state = 'error' end repeat;
+    close my_cursor;
+end;$$
+
+create procedure proc_cursor_2()
+modifies sql data 
+begin
+    declare state char(20);
+    declare my_score int;
+    declare my_stuid char(20);
+    declare my_cursor cursor for select 考生号, 总成绩 from xsb;
+    -- declare continue handler for not found set state = 'error';
+    -- 注释掉会报错: ERROR 1329 (02000): No data - zero rows fetched, selected, or processed
+    open my_cursor;
+    repeat
+        fetch my_cursor into my_stuid, my_score;
+        set my_score = my_score + 1;
+        update xsb set 总成绩 = my_score where 考生号 = my_stuid;
+    until state = 'error' end repeat;
+    -- close my_cursor;
+end;$$
+
+create procedure proc_cursor_3()
+modifies sql data 
+begin
+    declare state char(20);
+    declare my_score int;
+    declare my_stuid char(20);
+    declare my_cursor cursor for select 考生号, 总成绩 from xsb;
+    declare continue handler for 1329 set state = 'error';
+    open my_cursor;
+    repeat
+        fetch my_cursor into my_stuid, my_score;
+        set my_score = my_score + 1;
+        -- 不写if最后一条记录会加2
+        update xsb set 总成绩 = my_score where 考生号 = my_stuid;
+    until state = 'error' end repeat;
+    -- close my_cursor;
+end;$$
+
+-- 2022.6.16
+
+use database_name;
+
+show tables;
+
+select * from information_schema.routines\G
+
+select * from
+(select row_number() over (partition by 课程名称 order by 成绩 asc) as row_num,
+                                                                         学号,
+                                                                         成绩 
+from choose join course.课程号 = choose.课程号) as temp
+where row_num = 1;
