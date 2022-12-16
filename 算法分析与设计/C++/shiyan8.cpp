@@ -2,6 +2,7 @@
 #include <limits.h>
 #include <queue>
 #include <vector>
+#include <stdlib.h>
 using namespace std;
 
 typedef int ElemType;
@@ -51,25 +52,16 @@ int height(TreeNode* root){
 	/*队列q中的元素类型为TreeNode*类型*/
 	/*可用的函数：q.size()返回元素个数，q.front()获得队首元素，q.pop()出队，q.push(某TreeNode*类型元素)入队*/
 	queue<TreeNode*> q;
-	// 声明一个二叉树节点的指针，用于访问节点
-	TreeNode* cur;
 	q.push(root);
 	while (!q.empty()){
-		//TODO:补全循环体，实现计算树的高度
-		// 访问队列的头部，并将其出队
-	 	cur = q.front();
-		q.pop();
-		// 如果出队的节点存在左孩子，将左孩子入队
-		if(cur->left){
-			q.push cur->left);
-			h++;
+		int level_size = q.size();
+		for(int i = 0; i < level_size; i++){
+			TreeNode* cur = q.front();
+			q.pop();
+			if(cur->left) q.push(cur->left);
+			if(cur->right) q.push(cur->right);
 		}
-		// 如果出队的节点存在右孩子，将右孩子入队
-		if(cur->right){
-			q.push cur->right);
-			h++;
-		}
-		// break;//编写代码时此行要删除
+		h++;
 	}
 	return h;
 }
@@ -80,5 +72,7 @@ int main(){
 	TreeNode* root;
 	createBinaryTree(root, input, sizeof(input) / sizeof(input[0]));
 	printf("树的高度为: %d\n", height(root));
+	getchar();
+	getchar();
 	return 0;
 }
