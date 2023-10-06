@@ -28,21 +28,41 @@ Status InitList_Sq(SqList& L) {
 	return OK;
 }
 
-void ShellInsert(SqList &L, int dk) {
-	for (int i = dk; i < L.length; ++i) {
-		if (LT(L.elem[i], L.elem[i - dk])) { // 将L.elem[i]插入有序增量子表
-			int temp = L.elem[i]; // 暂存
-			int j;
-			for (j = i - dk; j > 0 && LT(temp, L.elem[j]); j -= dk) {
-				temp = L.elem[j + dk];
-				L.elem[j + dk] = L.elem[j]; // 记录后移
-				L.elem[j] = temp;
+void ShellSort_2(int* arr, int size) {
+	int gap = size;
+	while (gap > 1) {
+		gap = gap / 3 + 1;	//调整希尔增量
+		for (int i = 0; i < size - gap; i++) {	//从0遍历到size-gap-1
+			int temp = arr[i + gap];
+			while (i >= 0) {
+				if (arr[i] > temp) {
+					arr[i + gap] = arr[i];
+					i -= gap;
+				}
+				else
+					break;
 			}
-			//temp = L.elem[j + dk];
-			L.elem[j + dk] = temp; // 插入
-			//L.elem[0] = temp;
+			arr[i + gap] = temp;	//以 i+gap 作为插入位置
 		}
 	}
+}
+
+void ShellInsert(SqList &L, int dk) {
+	for (int i = dk; i < L.length; i++) {
+		if (LT(L.elem[i], L.elem[i - dk])) { // 将L.elem[i]插入有序增量子表
+			int temp = L.elem[i - dk]; // 暂存
+			L.elem[i - dk] = L.elem[i]; // 把后面大的记录移到前面
+			int j;
+			for (j = i - dk; j > 0 && LT(temp, L.elem[j]); j -= dk) { ;
+				L.elem[j + dk] = L.elem[j]; // 把前面小的记录移到后面
+			}
+			L.elem[j+dk] = temp; // 插入
+		}
+	}
+	/*for (int i = 0; i < L.length; i++) {
+		printf("%d ", L.elem[i]);
+	}
+	printf("\n");*/
 }
 
 void ShellSort(SqList &L, int dlta[], int t) {
@@ -51,29 +71,11 @@ void ShellSort(SqList &L, int dlta[], int t) {
 		ShellInsert(L, dlta[k]); // 一趟增量为dlta[k]的插入排序
 }
 
-void ShellSort_2(int* arr, int size){
-	int gap = size;
-	while (gap > 1){
-		gap = gap / 3 + 1;	//调整希尔增量
-		for (int i = 0; i < size - gap; i++){	//从0遍历到size-gap-1
-			int temp = arr[i + gap];
-			while (i >= 0){
-				if (arr[i] > temp){
-					arr[i + gap] = arr[i];
-					i -= gap;
-				}else
-					break;
-			}
-			arr[i + gap] = temp;	//以 i+gap 作为插入位置
-		}
-	}
-}
-
 int main() {
 	SqList L;
 	InitList_Sq(L);
 	int a[6] = { 25, 73, 12, 80, 116, 15 };
-	int dlta[4] = { 5, 3, 2, 1 };
+	int dlta[3] = { 3, 2, 1 };
 	for (int i = 0; i < 6; i++) {
 		L.elem[i] = a[i];
 		L.length++;
@@ -82,7 +84,7 @@ int main() {
 
 	//ShellSort_2(a, 6);
 
-	ShellSort(L, dlta, 4);
+	ShellSort(L, dlta, 3);
 
 	for (int i = 0; i < 6; i++) {
 		printf("%d ", L.elem[i]);
