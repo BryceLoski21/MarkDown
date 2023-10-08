@@ -1,0 +1,3 @@
+﻿  SelectSort.cpp
+D:\Coding\MarkDown\077500\code\SelectSort\SelectSort.cpp(47,13): warning C4326: “main”的返回类型应为“int”而非“void”
+  SelectSort.vcxproj -> D:\Coding\MarkDown\077500\code\SelectSort\x64\Debug\SelectSort.exe
