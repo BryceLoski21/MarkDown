@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PreOrderTraverse.cpp">
+    <ClCompile Include="GetCountOfLeaf.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
