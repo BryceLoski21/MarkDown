@@ -8,6 +8,8 @@
 typedef int ElemType;
 typedef int Status;
 
+int count = 0;
+
 // 二叉树的二叉链表存储表示
 typedef struct BiTNode {
 	ElemType data;
@@ -53,7 +55,9 @@ void PreOrderTraverse(BiTree T)
 
 // 返回二叉树中叶子结点个数
 int GetCountOfLeaf(BiTree &r) {
-	int count = 0;
+	// int count = 0; 
+	// bug：每次递归调用count都会初始化为0
+	// debug: 把count定义成全局变量
 	if (r != NULL) { // 非空
 		if (r->lchild == NULL && r->rchild == NULL) {
 			count++;
