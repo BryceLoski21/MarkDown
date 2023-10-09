@@ -1,0 +1,3 @@
+﻿  ListInsert_L.cpp
+D:\Coding\MarkDown\077500\code\ListInsert_L\ListInsert_L.cpp(49,13): warning C4326: “main”的返回类型应为“int”而非“void”
+  ListInsert_L.vcxproj -> D:\Coding\MarkDown\077500\code\ListInsert_L\x64\Debug\ListInsert_L.exe
