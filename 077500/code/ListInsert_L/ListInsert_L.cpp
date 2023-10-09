@@ -6,8 +6,8 @@
 typedef int ElemType;
 typedef int Status;
 
-#define ERROR -2;
-#define OK 1;
+#define ERROR -2
+#define OK 1
 
 typedef struct LNode {
 	ElemType data;
