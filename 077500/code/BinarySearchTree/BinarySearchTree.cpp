@@ -59,15 +59,15 @@ Status InsertBST(BiTree& T, ElemType e) {
 	else return FALSE; // 树中已有关键字相同的结点
 }
 
-void main() {
-	BiTree T = (BiTree)malloc(sizeof(BiTNode));
-	assert(T);
-	T = NULL;
-	//T->lchild = NULL;
-	//T->rchild = NULL;
-	ElemType e;
-	e.data = 23;
-	e.key = 23;
-	InsertBST(T, e);
-	printf("%d", T->elem.data);
-}
+//void main() {
+//	BiTree T = (BiTree)malloc(sizeof(BiTNode));
+//	assert(T);
+//	T = NULL;
+//	//T->lchild = NULL;
+//	//T->rchild = NULL;
+//	ElemType e;
+//	e.data = 23;
+//	e.key = 23;
+//	InsertBST(T, e);
+//	printf("%d", T->elem.data);
+//}
