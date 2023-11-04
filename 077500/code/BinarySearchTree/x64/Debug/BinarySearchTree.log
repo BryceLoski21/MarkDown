@@ -1,6 +1,4 @@
-﻿  demo.cpp
-D:\Coding\MarkDown\077500\code\BinarySearchTree\demo.cpp(33,47): warning C4477: “snprintf”: 格式字符串“%ld”需要类型“long”的参数，但可变参数 1 拥有了类型“time_t”
-D:\Coding\MarkDown\077500\code\BinarySearchTree\demo.cpp(33,47): message : 请考虑在格式字符串中使用“%lld”
-D:\Coding\MarkDown\077500\code\BinarySearchTree\demo.cpp(33,47): message : 请考虑在格式字符串中使用“%Id”
-D:\Coding\MarkDown\077500\code\BinarySearchTree\demo.cpp(33,47): message : 请考虑在格式字符串中使用“%I64d”
+﻿  BinarySearchTree.cpp
+  AVLBST.cpp
+  正在生成代码...
   BinarySearchTree.vcxproj -> D:\Coding\MarkDown\077500\code\BinarySearchTree\x64\Debug\BinarySearchTree.exe

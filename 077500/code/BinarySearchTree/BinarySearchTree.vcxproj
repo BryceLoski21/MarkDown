@@ -127,13 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AVLTree.cpp" />
     <ClCompile Include="BinarySearchTree.cpp" />
-    <ClCompile Include="bTree.cpp" />
-    <ClCompile Include="demo.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="bTree.h" />
+    <ClCompile Include="AVLBST.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,8 @@
 #include <malloc.h>
 #include <assert.h>
 
+//#include "BSTNode.cpp"
+
 //typedef int ElemType;
 typedef int KeyType;
 typedef int Status;
@@ -14,6 +16,7 @@ typedef int Status;
 #define MAXSIZE 100
 #define LT(a, b) ((a) < (b)) // 小于
 #define EQ(a, b) ((a) == (b)) // 等于
+#define max(a, b) ((a) > (b)? (a) : (b)) // 返回最大值 
 
 struct ElemType {
 	int data;
@@ -23,6 +26,10 @@ struct ElemType {
 typedef struct BiTNode{
 	ElemType elem;
 	struct BiTNode* lchild, * rchild; // 左右孩子指针
+	BiTNode( ElemType elem) {
+		lchild = rchild = NULL;
+		this->elem = elem;
+	}
 }BiTNode, *BiTree;
 
 Status SearchBST(BiTree T, KeyType key, BiTree f, BiTree& p) {
@@ -38,14 +45,13 @@ Status SearchBST(BiTree T, KeyType key, BiTree f, BiTree& p) {
 	else if (LT(key, T->elem.key)) {
 		return SearchBST(T->lchild, key, T, p); // 在左子树中继续查找
 	}
-	else return SearchBST(T->lchild, key, T, p); // 在右子树中继续查找
+	else return SearchBST(T->rchild, key, T, p); // 在右子树中继续查找
 }
 
 Status InsertBST(BiTree& T, ElemType e) {
-	// 二叉排序树的插入
-	/*BiTree p = (BiTree)malloc(sizeof(BiTNode));
-	assert(p);*/
-	BiTree p = T;
+	// 二叉排序树的插入(不存在关键字相同的结点)
+	BiTree p = (BiTree)malloc(sizeof(BiTNode));
+	assert(p);
 	if (!SearchBST(T, e.key, NULL, p)) { // 查找不成功
 		BiTree s = (BiTree)malloc(sizeof(BiTNode));
 		assert(s);
@@ -59,15 +65,22 @@ Status InsertBST(BiTree& T, ElemType e) {
 	else return FALSE; // 树中已有关键字相同的结点
 }
 
-//void main() {
+//int main() {
+//
+//	// 二叉排序树
 //	BiTree T = (BiTree)malloc(sizeof(BiTNode));
 //	assert(T);
-//	T = NULL;
-//	//T->lchild = NULL;
-//	//T->rchild = NULL;
+//	T = NULL; // 构造一颗空树
 //	ElemType e;
-//	e.data = 23;
-//	e.key = 23;
-//	InsertBST(T, e);
-//	printf("%d", T->elem.data);
+//	for (int i = 0; i < 10; i++) { // 右单支树
+//		e.data = e.key = i;
+//		InsertBST(T, e);
+//	}
+//	while (T) {
+//		printf("%d ", T->elem.data);
+//		T = T->rchild;
+//		printf("\n");
+//	}
+//
+//	return 0;
 //}

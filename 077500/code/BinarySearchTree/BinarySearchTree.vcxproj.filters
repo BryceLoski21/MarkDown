@@ -18,19 +18,8 @@
     <ClCompile Include="BinarySearchTree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="AVLTree.cpp">
+    <ClCompile Include="AVLBST.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="demo.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="bTree.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="bTree.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
