@@ -57,6 +57,17 @@
 </dependencies>
 ```
 
+- 继承: 继承一个父工程, 使用parent标签
+
+```xml
+<parent> 
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-parent</artifactId>
+  <version>2.7.4</version>
+  <relativePath/> <!-- lookup parent from repository  -->
+</parent>
+```
+
 ## 依赖范围
 
 - 依赖的jar包, 默认可以在任何地方使用, scope标签可以设置依赖的作用范围
