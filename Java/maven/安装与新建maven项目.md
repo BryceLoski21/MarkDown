@@ -1,6 +1,6 @@
-# 下载与安装
+# 下载与安装maven
 
-- ![下载](https://maven.apache.org/download.cgi)
+- [官网下载](https://maven.apache.org/download.cgi)
 - 安装
   1. 解压文件
   2. 配置解压路径作为MAVEN_HOME环境变量
@@ -33,7 +33,7 @@
 </settings>
 ```
 
-# IDEA新建项目
+# IDEA新建maven
 
 - IDEA设置(全局设置)
   1. 设置maven路径以及setting.xml路径和repository路径
@@ -47,3 +47,19 @@
     > 更高版本的IDEA可以选择maven archetype, archetype setting 可选择 quick start 或 webapp
 
 - 测试一遍hello world通过即可
+
+# IDEA导入maven
+
+- 方式一
+  1. IDEA右侧maven面板
+  2. "+" add module
+  3. 找到要添加的项目的pom.xml文件点击ok即可(maven项目要在工作目录下)
+
+- 方式二
+  1. project structure
+  2. modules
+  3. "+" add module
+  4. 找到要添加的项目的pom.xml文件点击ok即可(maven项目要在工作目录下)
+
+- 删除
+  - remove module(实际上文件还在, 即在资源管理器中还是能够看见maven项目)
