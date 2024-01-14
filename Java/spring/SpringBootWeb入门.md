@@ -23,3 +23,10 @@
   - 运行测试
     - http\://localhost:8080/hello 默认端口8080
   
+- 起步依赖
+  - spring\-boot\-starter\-web
+  - spring\-boot\-starter\-test
+  - [starter](https://docs.spring.io/spring-boot/docs/2.7.4/reference/htmlsinge/#using.build-systems.starters)
+
+- 内嵌TomCat服务器
+  > 基于SpringBoot开发的Web应用程序, 内置了TomCat服务器, 当启动类运行时, 会自动启动内嵌的TomCat服务器
