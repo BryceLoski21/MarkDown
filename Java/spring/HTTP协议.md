@@ -106,31 +106,31 @@
     - @RequestParam中的required属性默认为true, 代表该请求参数必须传递, 如果不传递会报错, 如果该参数是可选的, 可以将required属性设置成false
 
     ```java
-        @RestController
-        public class RequestController{
-            // spring boot方式
-            @RequestMapping("/simpleParam")
-            public String simpleParam(@RequestParam(value = "name", required = false)String name, Integer age){ // String age会进行自动类型转换成Integer
+    @RestController
+    public class RequestController{
+        // spring boot方式
+        @RequestMapping("/simpleParam")
+        public String simpleParam(@RequestParam(value = "name", required = false)String name, Integer age){ // String age会进行自动类型转换成Integer
 
-                System.out.println(name+ ": "+ age);
-                return "OK";
+            System.out.println(name+ ": "+ age);
+            return "OK";
 
-            }
         }
-        ```
+    }
+    ```
 
 - 实体参数
   - 简单实体对象: 请求参数名与形参对象属性名相同, 定义POJO(Pure Ordinary Java Object)接收即可
 
     ```java
     // 伪代码
-        @RequestMapping("/simpleParam")
-        public String simpleParam(User user){ 
-            // 需要保证实体对象和请求属性一致
-            System.out.println(user);
-            return "OK";
+    @RequestMapping("/simplePojo")
+    public String simplePojo(User user){ 
+        // 需要保证实体对象和请求属性一致
+        System.out.println(user);
+        return "OK";
 
-        }
+    }
     public class User{
         private String name;
         private String age;
@@ -141,8 +141,8 @@
 
     ```java
     // 伪代码
-        @RequestMapping("/simpleParam")
-        public String simpleParam(User user){ 
+        @RequestMapping("/complexPojo")
+        public String complexPojo(User user){ 
             // 需要保证实体对象和请求属性一致
             System.out.println(user);
             return "OK";
@@ -160,3 +160,127 @@
         private String city;
     }
     ```
+
+- 数组集合参数
+  - 数组参数, 请求参数名与形参中数组变量名相同且请求参数为多个, 定义数组类型形参即可接收参数
+
+  ```java
+  @RequestMapping("/arrayParam")
+  public String arrayParam(String[] hobby){ 
+            
+    System.out.println(Arrays.toString(hobby));
+    return "OK";
+
+  }
+  ```
+
+  - 集合参数, 请求参数名与形参中集合变量名相同且请求参数为多个, 使用@RequestParam绑定参数关系
+
+  ```java
+  @RequestMapping("/listParam")
+  public String listParam(@RequestParam List<String> hobby){ 
+            
+    System.out.println(hobby);
+    return "OK";
+
+  }
+  ```
+
+- 日期参数: 使用@DateTimeFormat注解完成日期参数格式转换
+
+  ```java
+  @RequestMapping("/dateParam")
+  // 时间格式前后端需一致, 变量名也需一致
+  public String dateParam(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime updateTime){ 
+            
+    System.out.println(updateTime);
+    return "OK";
+  }
+  ```
+
+- JSON参数: JSON数据**键名**与形参对象**属性名**相同, 定义POJO类型形参即可接收参数, 需要使用@RequestBody标识
+
+  ```json
+  {// postman中, 选择post方式, 选择raw, 选择JSON
+    "name": "string",
+    "age": 23,
+    "address": {
+      "province": "北京",
+      "city": "北京"
+    }
+  }
+  ```
+  
+  ```json
+  [ // JSON数组格式
+    {
+      "province": "北京",
+      "city": "北京"
+    },
+    {
+      "province": "北京",
+      "city": "北京"
+    }
+  ]
+  ```
+
+  ```java
+  @RequestMapping("/jsonParam")
+  public String jsonParam(@RequestBody User user){ 
+      // 需要保证类属性和请求属性名一致
+      System.out.println(user);
+      return "OK";
+
+  }
+  public class User{
+      private String name;
+      private String age;
+      private Address address;
+  }
+  public class Address{
+      private String province;
+      private String city;
+  }
+  ```
+
+- 路径参数: 通过请求URL直接传递参数, 使用{...}来标识该路径参数, 需要使用@PathVariable获取路径参数
+
+  ```java
+  @RequestMapping("/path/{id}/{name}") // {id}可以接收动态值, 不是固定值
+  // {}内的定义名需要与形参名一致
+  public String pathParam(@PathVariable Integer id, @PathVariable String name){
+    System.out.println(id + ": " + name);
+    return "OK";
+  }
+  ```
+
+### 响应
+
+- @ResponseBody
+  - 类型: 方法注解、类注解
+  - 位置: Controller方法上/类上
+  - 作用: 将方法返回值直接响应, 如果返回值类型是 实体对象/集合, 将会转换为JSON格式响应
+  - 说明: @RestController = @Controller +  @ResponseBody;
+
+- 统一响应结果
+
+  ```java
+  public class Result{
+    // 响应码, 1成功, 0失败
+    private Integer code;
+    // 提示信息
+    private String msg;
+    // 返回数据
+    private Object data;
+    // ......
+  }
+  ```
+
+  ```json
+  {
+    "code": 1,
+    "msg": "success",
+    "data": "String Text"
+  }
+  ```
+  
