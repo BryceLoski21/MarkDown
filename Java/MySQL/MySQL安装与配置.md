@@ -56,7 +56,7 @@ Complete表示完全安装,表示安装所有MySQL组件;
 9. 成功进入服务后修改密码    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密码';
 10. 这一步非必选, 创建任意IP可访问的用户 create user 'name'@'%' identified with mysql_native_password by "密码";
 
-```txt
+```ini
 [client]
 # client下的"port"用来说明客户端连接MySQL使用的TCP/IP端口,默认3306
 port=3306
@@ -139,9 +139,9 @@ my.ini以及其它ini文件分别是MySQL的标准配置文件和备用配置文
 
 Windows Terminal中(有时需要管理员权限,一般情况用户权限就可以)输入`net start mysql`启动MySQL服务,然后输入`mysql [-h hostname] -u username -p [password] [-P port]`登录服务器.
 
-(1).MySQL命令(语句)输入结束,应使用分号";"结束.
-(2).Windows平台下,MySQL语句关键字和函数名等不区分大小写.
-(3).取消当前MySQL语句的输入可使用"\c".
-(4).退出MySQL可使用"quit"或"\q".
+1. MySQL命令(语句)输入结束,应使用分号";"结束.
+2. Windows平台下,MySQL语句关键字和函数名等不区分大小写.
+3. 取消当前MySQL语句的输入可使用"\c".
+4. 退出MySQL可使用"quit"或"\q".
 
 MySQL服务器上,information_schema、mysql、performance_schema是系统已有的数据库(若版本不同,系统已有数据库可能还会有test或sys数据库).
